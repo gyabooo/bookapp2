@@ -14,7 +14,13 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: "stylesheet",
+        href: 'https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -23,7 +29,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['ant-design-vue/dist/antd.css'],
+  css: ['ant-design-vue/dist/antd.css', '@/assets/common.scss'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -38,7 +44,16 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ['nuxt-fontawesome'],
+  fontawesome: {
+    imports: [
+      //import whole set
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      }
+    ]
+  },
   /*
    ** Build configuration
    */

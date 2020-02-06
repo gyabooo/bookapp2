@@ -17,10 +17,6 @@
     "axios": "^0.19.2",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
-    "pug": "^2.0.4",
-    "pug-loader": "^2.4.0",
-    "pug-plain-loader": "^1.0.0",
-    "sass-loader": "^8.0.2",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
@@ -32,6 +28,11 @@
     "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-prettier": "^3.0.1",
     "netlify-lambda": "^1.6.3",
-    "prettier": "^1.16.4"
+    "node-sass": "^4.13.1",
+    "prettier": "^1.16.4",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
+    "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^8.0.2"
   }
 }
