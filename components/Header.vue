@@ -12,7 +12,7 @@ export default {}
 .p-header {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   &__icon {
     width: 34px;
     height: 26px;

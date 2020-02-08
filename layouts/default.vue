@@ -1,5 +1,5 @@
 <template lang="pug">
-  a-layout.l-default
+  a-layout.default
     a-layout-header.c-heading
       Header
     a-layout-content
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.l-default {
+.default {
   min-height: 100vh;
   background-color: white;
 }
