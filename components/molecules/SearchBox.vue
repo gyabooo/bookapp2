@@ -8,7 +8,7 @@
         a-form-item(label="タイトル" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
           a-input(v-decorator="['search', { rules: [{ required: true, whitespace: true , message: '何か入力してください' }] }]" placeholder="タイトルを入力してください")
         a-form-item
-          a-button(type="primary" html-type="submit" :disabled="isSearching").m-searchbox__btn
+          a-button(type="primary" html-type="submit").m-searchbox__btn
             a-icon(type="search").m-searchbox__searchIcon
     // 仮設置
     Book(v-for="book in this.contents" :key="book.id" :book="book")
