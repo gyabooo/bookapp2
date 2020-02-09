@@ -13,20 +13,12 @@
       div.m-searchbook__info
         font-awesome-icon(:icon="['fas', 'info-circle']").m-searchbook__infoIcon
         span.m-searchbook__infoText {{infoText}}
-    // 仮設置
-    Book(v-for="book in this.contents" :key="book.id" :book="book")
 </template>
 
 <script>
-// import { mapMutations } from 'vuex'
-import Book from '@/components/molecules/Book'
-
 const axios = require('axios')
 
 export default {
-  components: {
-    Book
-  },
   props: {
     url: {
       type: String,

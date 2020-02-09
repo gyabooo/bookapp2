@@ -50,6 +50,16 @@ export default {
    ** Nuxt.js modules
    */
   modules: ['nuxt-fontawesome', '@nuxtjs/style-resources'],
+  /*
+   ** Build configuration
+   */
+  build: {
+    /*
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {}
+  },
+  // Add custome settings
   fontawesome: {
     imports: [
       {
@@ -60,14 +70,5 @@ export default {
   },
   styleResources: {
     scss: ['~/assets/common.scss']
-  },
-  /*
-   ** Build configuration
-   */
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {}
   }
 }
