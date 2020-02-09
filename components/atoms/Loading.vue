@@ -1,6 +1,6 @@
 <template lang="pug">
   div.a-loading
-    font-awesome-icon(:icon="['fas', 'spinner']").a-loading__icon.a-blinking
+    font-awesome-icon(:icon="['fas', 'spinner']").a-loading__icon.a-loading__animate
 </template>
 
 <script>
@@ -10,11 +10,16 @@ export default {}
 <style lang="scss" scoped>
 .a-loading {
   text-align: center;
-}
-.a-blinking {
-  -webkit-animation: blink 1.5s linear infinite;
-  -moz-animation: blink 1.5s linear infinite;
-  animation: blink 1.5s linear infinite;
+  &__icon {
+    width: 50px;
+    height: 50px;
+    color: linear-gradient(to right, $site_color, white);
+  }
+  &__animate {
+    -webkit-animation: blink 1.5s linear infinite;
+    -moz-animation: blink 1.5s linear infinite;
+    animation: blink 1.5s linear infinite;
+  }
 }
 @keyframes blink {
   0% {
