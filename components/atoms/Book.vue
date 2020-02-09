@@ -1,8 +1,8 @@
 <template lang="pug">
-  a-col(:xs="8" :sm="8" :md="8" :lg="8")
+  a-col(:xs="{ span: 8 }" :sm="8" :md="8" :lg="8")
     a-card(hoverable)
       a(:href="link" target="_blank")
-        img(img :src="image" alt="画像" slot="cover")
+        img(img :src="image" alt="画像")
       a-card-meta(:title="title")
 </template>
 
