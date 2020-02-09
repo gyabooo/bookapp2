@@ -7,7 +7,7 @@
 
 <script>
 const axios = require('axios')
-const noImagePath = '~assets/images/no-image.png'
+const noImagePath = '/images/no-image.png'
 const path = '/.netlify/functions/thumbnail?isbn='
 const url = 'https://iss.ndl.go.jp/thumbnail/'
 
