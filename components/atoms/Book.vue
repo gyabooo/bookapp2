@@ -3,7 +3,6 @@
     a-card(:title="title")
       a(:href="link" target="_blank").a-book__link
         img(img :src="image" alt="画像").a-book__image
-      a-card-meta(:title="title").a-book__title
 </template>
 
 <script>
