@@ -1,20 +1,24 @@
 <template lang="pug">
-  div.m-searchbox.c-container
-    div.m-searchbox__wrapper
-      h1.m-searchbox__title
-        font-awesome-icon(:icon="['fas', 'book']").m-searchbox__titleLogo
-        span.m-searchbox__titleText 本を探す
-      a-form(:form="form" @submit="handleSubmit").m-searchbox__form
+  div.m-searchbook.c-container
+    div.m-searchbook__wrapper
+      h1.m-searchbook__title
+        font-awesome-icon(:icon="['fas', 'book']").m-searchbook__titleLogo
+        span.m-searchbook__titleText 本を探す
+      a-form(:form="form" @submit="handleSubmit").m-searchbook__form
         a-form-item(label="タイトル" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
           a-input(v-decorator="['search', { rules: [{ required: true, whitespace: true , message: '何か入力してください' }] }]" placeholder="タイトルを入力してください")
         a-form-item
-          a-button(type="primary" html-type="submit" :disabled="isSearching").m-searchbox__btn
-            a-icon(type="search").m-searchbox__searchIcon
+          a-button(type="primary" html-type="submit" :disabled="isSearching").m-searchbook__btn
+            a-icon(type="search").m-searchbook__searchIcon
+      div.m-searchbook__info
+        font-awesome-icon(:icon="['fas', 'info-circle']").m-searchbook__infoIcon
+        span.m-searchbook__infoText {{infoText}}
     // 仮設置
     Book(v-for="book in this.contents" :key="book.id" :book="book")
 </template>
 
 <script>
+// import { mapMutations } from 'vuex'
 import Book from '@/components/molecules/Book'
 
 const axios = require('axios')
@@ -33,15 +37,15 @@ export default {
     return {
       form: this.$form.createForm(this, { name: 'coordinated' }),
       isSearching: false,
+      isSearched: false,
       contents: []
     }
   },
   methods: {
     handleSubmit(e) {
       e.preventDefault()
-      console.log(this.url)
-      this.isSearch = true
-      this.contents.splice(0, this.contents.length)
+      this.isSearching = true
+      this.$store.commit('books/reset', e.target.value)
 
       this.form.validateFields((err, values) => {
         if (!err) {
@@ -49,27 +53,37 @@ export default {
           axios
             .get(this.url + values.search)
             .then((res) => {
-              this.contents = res.data.content
+              this.$store.commit('books/set', res.data.content)
             })
             .catch((e) => {
               this.error = e.message
             })
             .finally(() => {
-              // if(this.contents.length === 0) {
+              // if (this.$store.state.books.list.length === 0) {
               //   this.error = '検索結果が0件です'
               // }
-              this.isSearch = false
-              console.log(this.contents)
+              this.isSearching = false
             })
         }
       })
+    }
+  },
+  computed: {
+    infoText() {
+      if (this.isSearching) {
+        return '検索中'
+      }
+      if (!this.isSearched) {
+        return '検索してください'
+      }
+      return `${this.$store.state.books.list.length}件見つかりました`
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.m-searchbox {
+.m-searchbook {
   &__wrapper {
     width: 80%;
     @include desktop {
@@ -123,6 +137,21 @@ export default {
   &__searchIcon {
     color: $site_color;
     font-size: 30px;
+  }
+  &__info {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__infoIcon {
+    color: $site_color;
+    width: 28px;
+    height: 28px;
+    margin-right: 5px;
+  }
+  &__infoText {
+    font-size: 18px;
   }
 }
 </style>
