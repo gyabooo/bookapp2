@@ -17,9 +17,9 @@ export default {}
   animation: blink 1.5s ease-in-out infinite alternate;
 }
 .a-rotating {
-  -webkit-animation: rotate 1.5s infinite;
-  -moz-animation: rotate 1.5s infinite;
-  animation: rotate 1.5s infinite;
+  -webkit-animation: rotate 1.5s linear infinite;
+  -moz-animation: rotate 1.5s linear infinite;
+  animation: rotate 1.5s linear infinite;
 }
 @keyframes blink {
   0% {
