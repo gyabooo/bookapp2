@@ -19,52 +19,67 @@ export default {}
 @-webkit-keyframes blink {
   0% {
     opacity: 0;
+    transform: rotate(72deg);
   }
   25% {
     opacity: 1;
+    transform: rotate(72deg);
   }
   50% {
     opacity: 0;
+    transform: rotate(72deg);
   }
   75% {
     opacity: 1;
+    transform: rotate(72deg);
   }
   100% {
     opacity: 0;
+    transform: rotate(72deg);
   }
 }
 @-moz-keyframes blink {
   0% {
     opacity: 0;
+    transform: rotate(72deg);
   }
   25% {
     opacity: 1;
+    transform: rotate(72deg);
   }
   50% {
     opacity: 0;
+    transform: rotate(72deg);
   }
   75% {
     opacity: 1;
+    transform: rotate(72deg);
   }
   100% {
     opacity: 0;
+    transform: rotate(72deg);
   }
 }
 @keyframes blink {
   0% {
     opacity: 0;
+    transform: rotate(72deg);
   }
   25% {
     opacity: 1;
+    transform: rotate(72deg);
   }
   50% {
     opacity: 0;
+    transform: rotate(72deg);
   }
   75% {
     opacity: 1;
+    transform: rotate(72deg);
   }
   100% {
     opacity: 0;
+    transform: rotate(72deg);
   }
 }
 </style>
