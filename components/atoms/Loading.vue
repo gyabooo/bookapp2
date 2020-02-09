@@ -12,14 +12,9 @@ export default {}
   text-align: center;
 }
 .a-blinking {
-  -webkit-animation: blink 1.5s linear infinite alternate;
-  -moz-animation: blink 1.5s linear infinite alternate;
-  animation: blink 1.5s linear infinite alternate;
-}
-.a-rotating {
-  -webkit-animation: rotate 1.5s linear infinite;
-  -moz-animation: rotate 1.5s linear infinite;
-  animation: rotate 1.5s linear infinite;
+  -webkit-animation: blink 1.5s linear infinite;
+  -moz-animation: blink 1.5s linear infinite;
+  animation: blink 1.5s linear infinite;
 }
 @keyframes blink {
   0% {
@@ -43,6 +38,7 @@ export default {}
 @-webkit-keyframes blink {
   0% {
     opacity: 0;
+    transform: rotate(0deg);
   }
   25% {
     opacity: 1;
@@ -55,11 +51,13 @@ export default {}
   }
   100% {
     opacity: 0;
+    transform: rotate(360deg);
   }
 }
 @-moz-keyframes blink {
   0% {
     opacity: 0;
+    transform: rotate(0deg);
   }
   25% {
     opacity: 1;
@@ -72,30 +70,7 @@ export default {}
   }
   100% {
     opacity: 0;
-  }
-}
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
     transform: rotate(360deg);
-  } 
-}
-@-moz-keyframes rotate {
-  0% {
-    transform: rotate(0deg);
   }
-  100% {
-    transform: rotate(360deg);
-  } 
-}
-@-webkit-keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  } 
 }
 </style>
