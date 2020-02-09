@@ -13,7 +13,7 @@ export default {}
   &__icon {
     width: 50px;
     height: 50px;
-    color: linear-gradient(to right, $site_color, white);
+    color: $site_color;
   }
   &__animate {
     -webkit-animation: blink 1.5s linear infinite;
