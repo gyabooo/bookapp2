@@ -20,7 +20,7 @@ export default {
 <style lang="scss" scoped>
 .m-booklist {
   &__books {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 }
 </style>

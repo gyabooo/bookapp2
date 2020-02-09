@@ -1,6 +1,6 @@
 <template lang="pug">
   a-col(:xs="24" :sm="24" :md="8" :lg="8").a-book
-    a-card(hoverable)
+    a-card(:title="title")
       a(:href="link" target="_blank").a-book__link
         img(img :src="image" alt="画像").a-book__image
       a-card-meta(:title="title").a-book__title
@@ -55,8 +55,6 @@ export default {
 
 <style lang="scss" scoped>
 .a-book {
-  &__link {
-    text-align: center;
-  }
+  text-align: center;
 }
 </style>

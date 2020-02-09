@@ -30,7 +30,5 @@ export default {
 
 <style lang="scss" scoped>
 .p-result {
-  &__books {
-  }
 }
 </style>
