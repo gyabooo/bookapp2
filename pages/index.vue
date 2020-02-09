@@ -10,10 +10,7 @@
 
 <script>
 import SearchBox from '@/components/molecules/SearchBox'
-
-// const axios = require('axios')
-// const path = '/.netlify/functions/search?title='
-// const url = '/.netlify/functions/search?title='
+// import Book from '@/components/molecules/Book'
 
 export default {
   components: {

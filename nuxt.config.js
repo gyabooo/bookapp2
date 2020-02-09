@@ -18,12 +18,13 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href: 'https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'
+        href:
+          'https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'
       },
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap'
-      },
+      }
     ]
   },
   /*
@@ -51,7 +52,6 @@ export default {
   modules: ['nuxt-fontawesome', '@nuxtjs/style-resources'],
   fontawesome: {
     imports: [
-      //import whole set
       {
         set: '@fortawesome/free-solid-svg-icons',
         icons: ['fas']

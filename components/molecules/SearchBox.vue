@@ -10,13 +10,19 @@
         a-form-item
           a-button(type="primary" html-type="submit").m-searchbox__btn
             a-icon(type="search").m-searchbox__searchIcon
-
+    // 仮設置
+    Book(v-for="book in this.contents" :key="book.id" :book="book")
 </template>
 
 <script>
+import Book from '@/components/molecules/Book'
+
 const axios = require('axios')
 
 export default {
+  components: {
+    Book
+  },
   props: {
     url: {
       type: String,
