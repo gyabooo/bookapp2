@@ -1,15 +1,19 @@
 <template lang="pug">
   section.p-contents
-    SearchBox
+    SearchBox(:url="url")
     a-layout-header.c-heading
       h1.p-result__title 検索結果
-    div.p-result__info
+    div.p-result__info.c-container
       font-awesome-icon(:icon="['fas', 'info-circle']").p-result__icon
       span.p-result__text {{resultText}}
 </template>
 
 <script>
-import SearchBox from '@/components/SearchBox'
+import SearchBox from '@/components/molecules/SearchBox'
+
+// const axios = require('axios')
+// const path = '/.netlify/functions/search?title='
+// const url = '/.netlify/functions/search?title='
 
 export default {
   components: {
@@ -17,6 +21,7 @@ export default {
   },
   data: () => {
     return {
+      url: '/.netlify/functions/search?title=',
       resultText: '検索してください'
     }
   }
@@ -24,7 +29,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/common.scss';
 .p-result {
   &__info {
     text-align: center;

@@ -1,9 +1,19 @@
 // Variables
 $site_color: #00D1B2;
+$site_borderColor: rgb(217, 217, 217);
+$site_bgColor: white;
+
+// Mixin
+@mixin desktop {
+  @media screen and (min-width: 1025px) {
+    @content;
+  }
+}
 
 // Common setting and class
 * {
   font-family: 'Kosugi Maru', sans-serif;
+  box-sizing: border-box;
 }
 
 .c-heading {
@@ -11,11 +21,22 @@ $site_color: #00D1B2;
   text-align: center;
   color: white;
   margin-bottom: 22px;
-
   h1, h2, h3 {
-    font-size: 24px;
+    font-size: 18px;
     color: white;
     margin-bottom: 0;
+  }
+  @include desktop {
+    h1, h2, h3 {
+      font-size: 24px;
+    }
+  }
+}
+
+.c-container {
+  @include desktop {
+    width: 1025px;
+    margin: 0 auto;
   }
 }
 
