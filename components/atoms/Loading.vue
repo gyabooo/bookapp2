@@ -1,6 +1,6 @@
 <template lang="pug">
   div.a-loading
-    font-awesome-icon(:icon="['fas', 'spinner']").a-loading__icon.a-blinking.a-rotating
+    font-awesome-icon(:icon="['fas', 'spinner']").a-loading__icon.a-blinking
 </template>
 
 <script>
@@ -12,9 +12,9 @@ export default {}
   text-align: center;
 }
 .a-blinking {
-  -webkit-animation: blink 1.5s ease-in-out infinite alternate;
-  -moz-animation: blink 1.5s ease-in-out infinite alternate;
-  animation: blink 1.5s ease-in-out infinite alternate;
+  -webkit-animation: blink 1.5s linear infinite alternate;
+  -moz-animation: blink 1.5s linear infinite alternate;
+  animation: blink 1.5s linear infinite alternate;
 }
 .a-rotating {
   -webkit-animation: rotate 1.5s linear infinite;
@@ -24,6 +24,7 @@ export default {}
 @keyframes blink {
   0% {
     opacity: 0;
+    transform: rotate(0deg);
   }
   25% {
     opacity: 1;
@@ -36,6 +37,7 @@ export default {}
   }
   100% {
     opacity: 0;
+    transform: rotate(360deg);
   }
 }
 @-webkit-keyframes blink {
