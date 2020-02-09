@@ -1,9 +1,9 @@
 <template lang="pug">
-  a-col(:xs="24" :sm="24" :md="8" :lg="8")
+  a-col(:xs="24" :sm="24" :md="8" :lg="8").a-book
     a-card(hoverable)
-      a(:href="link" target="_blank")
-        img(img :src="image" alt="画像")
-      a-card-meta(:title="title")
+      a(:href="link" target="_blank").a-book__link
+        img(img :src="image" alt="画像").a-book__image
+      a-card-meta(:title="title").a-book__title
 </template>
 
 <script>
@@ -54,10 +54,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.book-content {
-  margin-bottom: 40px;
-}
-.card {
-  height: 100%;
+.a-book {
+  &__link {
+    text-align: center;
+  }
 }
 </style>
