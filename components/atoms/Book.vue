@@ -1,5 +1,5 @@
 <template lang="pug">
-  a-col(:xs="{ span: 24 }" :sm="8" :md="8" :lg="8")
+  a-col(:xs="24" :sm="24" :md="8" :lg="8")
     a-card(hoverable)
       a(:href="link" target="_blank")
         img(img :src="image" alt="画像")
