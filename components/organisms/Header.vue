@@ -1,8 +1,8 @@
 <template lang="pug">
   section.o-header
     router-link(to='/')
-    font-awesome-icon(:icon="['fas', 'book-open']").o-header__icon
-    h1.o-header__title とある本検索サイト
+      font-awesome-icon(:icon="['fas', 'book-open']").o-header__icon
+      h1.o-header__title とある本検索サイト
 </template>
 
 <script>

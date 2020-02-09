@@ -1,5 +1,5 @@
 <template lang="pug">
-  a-col(:xs="24" :sm="24" :md="8" :lg="8").a-book
+  a-col(:xs="24" :sm="24" :md="12" :lg="12" :xl="6").a-book
     a-card(:title="title")
       a(:href="link" target="_blank").a-book__link
         img(img :src="image" alt="画像").a-book__image
