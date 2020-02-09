@@ -1,19 +1,8 @@
-<template>
-  <div class="column is-4 book-content">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-header-title">{{ title }}</div>
-      </div>
-      <div class="card-image">
-        <figure class="image is-1by1">
-          <a :href="link" target="_blank">
-            <img :src="image" alt="画像" />
-          </a>
-        </figure>
-      </div>
-      <div class="card-content" v-html="description"></div>
-    </div>
-  </div>
+<template lang="pug">
+  a-card(hoverable)
+    a(:href="link" target="_blank")
+      img(img :src="image" alt="画像")
+    a-card-meta(:title="title")
 </template>
 
 <script>
