@@ -23,19 +23,19 @@ export default {}
   }
   25% {
     opacity: 1;
-    transform: rotate(72deg);
+    transform: rotate(144deg);
   }
   50% {
     opacity: 0;
-    transform: rotate(72deg);
+    transform: rotate(216deg);
   }
   75% {
     opacity: 1;
-    transform: rotate(72deg);
+    transform: rotate(288deg);
   }
   100% {
     opacity: 0;
-    transform: rotate(72deg);
+    transform: rotate(360deg);
   }
 }
 @-moz-keyframes blink {
@@ -45,19 +45,19 @@ export default {}
   }
   25% {
     opacity: 1;
-    transform: rotate(72deg);
+    transform: rotate(144deg);
   }
   50% {
     opacity: 0;
-    transform: rotate(72deg);
+    transform: rotate(216deg);
   }
   75% {
     opacity: 1;
-    transform: rotate(72deg);
+    transform: rotate(288deg);
   }
   100% {
     opacity: 0;
-    transform: rotate(72deg);
+    transform: rotate(360deg);
   }
 }
 @keyframes blink {
@@ -67,19 +67,19 @@ export default {}
   }
   25% {
     opacity: 1;
-    transform: rotate(72deg);
+    transform: rotate(144deg);
   }
   50% {
     opacity: 0;
-    transform: rotate(72deg);
+    transform: rotate(216deg);
   }
   75% {
     opacity: 1;
-    transform: rotate(72deg);
+    transform: rotate(288deg);
   }
   100% {
     opacity: 0;
-    transform: rotate(72deg);
+    transform: rotate(360deg);
   }
 }
 </style>
