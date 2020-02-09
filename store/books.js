@@ -7,6 +7,6 @@ export const mutations = {
     state.list = list
   },
   reset(state) {
-    state.list.splice(0, this.contents.length)
+    state.list.splice(0, state.list.length)
   }
 }
