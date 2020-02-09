@@ -1,6 +1,6 @@
 <template lang="pug">
   div.a-loading
-    font-awesome-icon(:icon="['fas', 'spinner']").a-loading__icon.a-blinking
+    font-awesome-icon(:icon="['fas', 'spinner']").a-loading__icon.a-blinking.a-rotating
 </template>
 
 <script>
@@ -16,70 +16,84 @@ export default {}
   -moz-animation: blink 1.5s ease-in-out infinite alternate;
   animation: blink 1.5s ease-in-out infinite alternate;
 }
-@-webkit-keyframes blink {
+.a-rotating {
+  -webkit-animation: rotate 1.5s infinite;
+  -moz-animation: rotate 1.5s infinite;
+  animation: rotate 1.5s infinite;
+}
+@keyframes blink {
   0% {
     opacity: 0;
-    transform: rotate(72deg);
   }
   25% {
     opacity: 1;
-    transform: rotate(144deg);
   }
   50% {
     opacity: 0;
-    transform: rotate(216deg);
   }
   75% {
     opacity: 1;
-    transform: rotate(288deg);
   }
   100% {
     opacity: 0;
-    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 @-moz-keyframes blink {
   0% {
     opacity: 0;
-    transform: rotate(72deg);
   }
   25% {
     opacity: 1;
-    transform: rotate(144deg);
   }
   50% {
     opacity: 0;
-    transform: rotate(216deg);
   }
   75% {
     opacity: 1;
-    transform: rotate(288deg);
   }
   100% {
     opacity: 0;
-    transform: rotate(360deg);
   }
 }
-@keyframes blink {
+@keyframes rotate {
   0% {
-    opacity: 0;
-    transform: rotate(72deg);
-  }
-  25% {
-    opacity: 1;
-    transform: rotate(144deg);
-  }
-  50% {
-    opacity: 0;
-    transform: rotate(216deg);
-  }
-  75% {
-    opacity: 1;
-    transform: rotate(288deg);
+    transform: rotate(0deg);
   }
   100% {
-    opacity: 0;
     transform: rotate(360deg);
+  } 
+}
+@-moz-keyframes rotate {
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(360deg);
+  } 
+}
+@-webkit-keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  } 
 }
 </style>
