@@ -13,12 +13,17 @@
       div.m-searchbook__info
         font-awesome-icon(:icon="['fas', 'info-circle']").m-searchbook__infoIcon
         span.m-searchbook__infoText {{infoText}}
+      Loading(v-show="isSearching")
 </template>
 
 <script>
+import Loading from '@/components/atoms/Loading'
 const axios = require('axios')
 
 export default {
+  components: {
+    Loading
+  },
   props: {
     url: {
       type: String,

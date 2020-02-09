@@ -1,9 +1,9 @@
 <template lang="pug">
   section.p-contents
     SearchBook(:url="url")
-    a-layout-header.c-heading
+    a-layout-header.c-heading.p-result
       h1.p-result__title 検索結果
-    Book(v-for="book in books" :key="book.id" :book="book")
+    Book(v-for="book in books" :key="book.id" :book="book").p-result__books
 </template>
 
 <script>
@@ -28,4 +28,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.p-result {
+}
+</style>
