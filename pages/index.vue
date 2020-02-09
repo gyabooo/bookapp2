@@ -3,19 +3,19 @@
     SearchBook(:url="url")
     a-layout-header.c-heading.p-result
       h1.p-result__title 検索結果
-    Book(v-for="book in books" :key="book.id" :book="book").p-result__books
+    BookList(:books="books").p-result__books
 </template>
 
 <script>
 import SearchBook from '@/components/molecules/SearchBook'
-import Book from '@/components/molecules/Book'
+import BookList from '@/components/molecules/BookList'
 
 export default {
   components: {
     SearchBook,
-    Book
+    BookList
   },
-  data: () => {
+  data() {
     return {
       url: '/.netlify/functions/search?title='
     }
@@ -30,5 +30,7 @@ export default {
 
 <style lang="scss" scoped>
 .p-result {
+  &__books {
+  }
 }
 </style>

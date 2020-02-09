@@ -1,8 +1,9 @@
 <template lang="pug">
-  a-card(hoverable)
-    a(:href="link" target="_blank")
-      img(img :src="image" alt="画像")
-    a-card-meta(:title="title")
+  a-col(:xs="8" :sm="8" :md="8" :lg="8")
+    a-card(hoverable)
+      a(:href="link" target="_blank")
+        img(img :src="image" alt="画像" slot="cover")
+      a-card-meta(:title="title")
 </template>
 
 <script>
