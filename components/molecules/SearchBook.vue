@@ -62,6 +62,7 @@ export default {
               //   this.error = '検索結果が0件です'
               // }
               this.isSearching = false
+              this.isSearched = true
             })
         }
       })
