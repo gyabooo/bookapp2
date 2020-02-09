@@ -53,7 +53,9 @@ export default {
           axios
             .get(this.url + values.search)
             .then((res) => {
+              console.log('res: ' + res.data.content)
               this.$store.commit('books/set', res.data.content)
+              console.log('list: ' + this.$store.state.books.list)
             })
             .catch((e) => {
               this.error = e.message
