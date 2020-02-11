@@ -17,7 +17,12 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
-        rel: "stylesheet",
+        rel: 'stylesheet',
+        href:
+          'https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'
+      },
+      {
+        rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap'
       }
     ]
@@ -29,7 +34,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['ant-design-vue/dist/antd.css', '@/assets/common.scss'],
+  css: ['ant-design-vue/dist/antd.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -44,16 +49,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['nuxt-fontawesome'],
-  fontawesome: {
-    imports: [
-      //import whole set
-      {
-        set: '@fortawesome/free-solid-svg-icons',
-        icons: ['fas']
-      }
-    ]
-  },
+  modules: ['nuxt-fontawesome', '@nuxtjs/style-resources'],
   /*
    ** Build configuration
    */
@@ -62,5 +58,17 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  // Add custome settings
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      }
+    ]
+  },
+  styleResources: {
+    scss: ['~/assets/common.scss']
   }
 }

@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Header from '@/components/organisms/Header'
+import Footer from '@/components/organisms/Footer'
 
 export default {
   components: {
@@ -23,6 +23,6 @@ export default {
 <style lang="scss" scoped>
 .default {
   min-height: 100vh;
-  background-color: white;
+  background-color: $site_bgColor;
 }
 </style>

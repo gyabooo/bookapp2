@@ -1,21 +1,55 @@
 // Variables
 $site_color: #00D1B2;
+$site_borderColor: rgb(217, 217, 217);
+$site_bgColor: white;
 
-// Common setting and class
-* {
-  font-family: 'Kosugi Maru', sans-serif;
+// Mixin
+@mixin desktop {
+  @media screen and (min-width: 769px) {
+    @content;
+  }
 }
 
+@mixin tablet {
+  @media screen and (min-width: 481px) {
+    @content;
+  }
+}
+
+// ページ全体で設定するCSS
+* {
+  font-family: 'Kosugi Maru', sans-serif;
+  box-sizing: border-box;
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+}
+.page-enter, .page-leave-to {
+  opacity: 0;
+}
+
+// 共通で使用できるクラス
 .c-heading {
   background-color: $site_color;
   text-align: center;
   color: white;
   margin-bottom: 22px;
-
   h1, h2, h3 {
-    font-size: 24px;
+    font-size: 18px;
     color: white;
     margin-bottom: 0;
+  }
+  @include desktop {
+    h1, h2, h3 {
+      font-size: 24px;
+    }
+  }
+}
+
+.c-container {
+  @include desktop {
+    margin: 0 auto;
   }
 }
 
@@ -23,3 +57,4 @@ $site_color: #00D1B2;
   background-color: $site_color;
   color: white;
 }
+

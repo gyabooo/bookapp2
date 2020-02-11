@@ -1,45 +1,34 @@
 <template lang="pug">
   section.p-contents
-    SearchBox
-    a-layout-header.c-heading
+    SearchBook(:url="url")
+    a-layout-header.c-heading.p-result
       h1.p-result__title 検索結果
-    div.p-result__info
-      font-awesome-icon(:icon="['fas', 'info-circle']").p-result__icon
-      span.p-result__text {{resultText}}
+    BookList(:books="books").p-result__books
 </template>
 
 <script>
-import SearchBox from '@/components/SearchBox'
+import SearchBook from '@/components/molecules/SearchBook'
+import BookList from '@/components/molecules/BookList'
 
 export default {
   components: {
-    SearchBox
+    SearchBook,
+    BookList
   },
-  data: () => {
+  data() {
     return {
-      resultText: '検索してください'
+      url: '/.netlify/functions/search?title='
+    }
+  },
+  computed: {
+    books() {
+      return this.$store.state.books.list
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/common.scss';
 .p-result {
-  &__info {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &__icon {
-    color: $site_color;
-    width: 28px;
-    height: 28px;
-    margin-right: 5px;
-  }
-  &__text {
-    font-size: 18px;
-  }
 }
 </style>
