@@ -16,12 +16,20 @@ $site_bgColor: white;
   }
 }
 
-// Common setting and class
+// ページ全体で設定するCSS
 * {
   font-family: 'Kosugi Maru', sans-serif;
   box-sizing: border-box;
 }
 
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+}
+.page-enter, .page-leave-to {
+  opacity: 0;
+}
+
+// 共通で使用できるクラス
 .c-heading {
   background-color: $site_color;
   text-align: center;
@@ -49,3 +57,4 @@ $site_bgColor: white;
   background-color: $site_color;
   color: white;
 }
+

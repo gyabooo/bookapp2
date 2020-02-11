@@ -1,6 +1,6 @@
 <template lang="pug">
   section
-    router-link(to='/').o-header__link
+    nuxt-link(to='/').o-header__link
       font-awesome-icon(:icon="['fas', 'book-open']").o-header__icon
       h1.o-header__title とある本検索サイト
 </template>
