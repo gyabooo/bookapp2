@@ -34,8 +34,7 @@ export default {
     return {
       form: this.$form.createForm(this, { name: 'coordinated' }),
       isSearching: false,
-      isSearched: false,
-      contents: []
+      isSearched: false
     }
   },
   methods: {
@@ -46,21 +45,16 @@ export default {
 
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values.search)
           axios
             .get(this.url + values.search)
             .then((res) => {
-              console.log('res: ' + res.data.content)
-              this.$store.commit('books/set', res.data.content)
-              console.log('list: ' + this.$store.state.books.list)
+              this.$store.commit('books/setItems', res.data.items)
+              this.$store.commit('books/setTotalItems', res.data.totalItems)
             })
             .catch((e) => {
               this.error = e.message
             })
             .finally(() => {
-              // if (this.$store.state.books.list.length === 0) {
-              //   this.error = '検索結果が0件です'
-              // }
               this.isSearching = false
               this.isSearched = true
             })
@@ -76,8 +70,11 @@ export default {
       if (!this.isSearched) {
         return '検索してください'
       }
-      return `${this.$store.state.books.list.length}件見つかりました`
+      return `${this.$store.state.books.totalItems}件中10件表示しています`
     }
+  },
+  mounted() {
+    console.log(this)
   }
 }
 </script>
@@ -86,9 +83,9 @@ export default {
 .m-searchbook {
   &__wrapper {
     width: 80%;
-    @include desktop {
-      width: 60%;
-    }
+    // @include desktop {
+    //   width: 60%;
+    // }
     text-align: center;
     border: 1px solid $site_borderColor;
     border-radius: 20px;

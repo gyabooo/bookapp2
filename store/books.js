@@ -1,12 +1,17 @@
 export const state = () => ({
-  list: []
+  items: [],
+  totalItems: 0
 })
 
 export const mutations = {
-  set(state, list) {
-    state.list = list
+  setItems(state, items) {
+    state.items = items
+  },
+  setTotalItems(state, totalItems) {
+    state.totalItems = totalItems
   },
   reset(state) {
-    state.list.splice(0, state.list.length)
+    state.items.splice(0, state.items.length)
+    state.totalItems = 0
   }
 }

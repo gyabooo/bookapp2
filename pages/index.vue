@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import SearchBook from '@/components/molecules/SearchBook'
+import SearchBook from '@/components/organisms/SearchBook'
 import BookList from '@/components/molecules/BookList'
 
 export default {
@@ -17,13 +17,13 @@ export default {
   },
   data() {
     return {
-      url: '/.netlify/functions/search?title='
+      // url: '/.netlify/functions/search?title='
+      url: 'https://www.googleapis.com/books/v1/volumes?q='
     }
   },
   computed: {
     books() {
-      console.log(this.$store.state.books.list)
-      return this.$store.state.books.list
+      return this.$store.state.books.items
     }
   }
 }
@@ -31,5 +31,7 @@ export default {
 
 <style lang="scss" scoped>
 .p-result {
+}
+.p-link {
 }
 </style>

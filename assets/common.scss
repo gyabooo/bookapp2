@@ -50,6 +50,7 @@ $site_bgColor: white;
 .c-container {
   @include desktop {
     margin: 0 auto;
+    width: 60%;
   }
 }
 
