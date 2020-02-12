@@ -9,8 +9,6 @@
 <script>
 import BookImage from '@/components/atoms/BookImage'
 const noImagePath = '/images/no-image.png'
-// const path = '/.netlify/functions/thumbnail?isbn='
-// const url = 'https://iss.ndl.go.jp/thumbnail/'
 
 export default {
   components: {

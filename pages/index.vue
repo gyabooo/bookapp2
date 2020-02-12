@@ -17,14 +17,22 @@ export default {
   },
   data() {
     return {
-      // url: '/.netlify/functions/search?title='
-      url: 'https://www.googleapis.com/books/v1/volumes?q='
+      url: 'https://www.googleapis.com/books/v1/volumes'
     }
   },
   computed: {
     books() {
       return this.$store.state.books.items
     }
+  },
+  created() {
+    console.log('Index created')
+  },
+  mounted() {
+    console.log('Index mounted')
+  },
+  destroyed() {
+    console.log('Index desttoyed')
   }
 }
 </script>

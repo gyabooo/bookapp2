@@ -7,22 +7,26 @@
       a-form(:form="form" @submit="handleSubmit").m-searchbook__form
         a-form-item(label="タイトル" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
           a-input(v-decorator="['search', { rules: [{ required: true, whitespace: true , message: '何か入力してください' }] }]" placeholder="タイトルを入力してください")
+        a-form-item(label="件数" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
+          SelectBox(:values="selectNumbers" :defaultValue="maxResults" @selectbox-changed="selectBoxChanged")
         a-form-item
           a-button(type="primary" html-type="submit" :disabled="isSearching").m-searchbook__btn
             a-icon(type="search").m-searchbook__searchIcon
       div.m-searchbook__info
         font-awesome-icon(:icon="['fas', 'info-circle']").m-searchbook__infoIcon
-        span.m-searchbook__infoText {{infoText}}
+        span.m-searchbook__infoText {{ infoText }}
       Loading(v-show="isSearching")
 </template>
 
 <script>
 import Loading from '@/components/atoms/Loading'
+import SelectBox from '@/components/atoms/SelectBox'
 const axios = require('axios')
 
 export default {
   components: {
-    Loading
+    Loading,
+    SelectBox
   },
   props: {
     url: {
@@ -34,7 +38,9 @@ export default {
     return {
       form: this.$form.createForm(this, { name: 'coordinated' }),
       isSearching: false,
-      isSearched: false
+      isSearched: false,
+      selectNumbers: [10, 30, 50, 100],
+      maxResults: 0
     }
   },
   methods: {
@@ -45,11 +51,18 @@ export default {
 
       this.form.validateFields((err, values) => {
         if (!err) {
+          const p = {
+            q: values.search,
+            Country: 'JP',
+            maxResults: this.maxResults
+          }
+
           axios
-            .get(this.url + values.search)
+            .get(this.url, { params: p })
             .then((res) => {
               this.$store.commit('books/setItems', res.data.items)
               this.$store.commit('books/setTotalItems', res.data.totalItems)
+              this.$store.commit('books/setKeyword', values.search)
             })
             .catch((e) => {
               this.error = e.message
@@ -60,9 +73,17 @@ export default {
             })
         }
       })
+    },
+    selectBoxChanged(e) {
+      console.log('emit: ' + e)
+      this.maxResults = e
+      console.log('insert maxResults: ' + this.maxResults)
     }
   },
   computed: {
+    keyword() {
+      return this.$store.state.books.keyword
+    },
     infoText() {
       if (this.isSearching) {
         return '検索中'
@@ -70,11 +91,20 @@ export default {
       if (!this.isSearched) {
         return '検索してください'
       }
-      return `${this.$store.state.books.totalItems}件中10件表示しています`
+      return `${this.$store.state.books.totalItems}件中${this.maxResults}件表示しています`
     }
   },
+  created() {
+    // console.log('SearchBook created')
+  },
   mounted() {
-    console.log(this)
+    // console.log('SearchBook mounted')
+    this.form.setFieldsValue({
+      search: this.keyword
+    })
+  },
+  destroyed() {
+    // console.log('SearchBook destroyed')
   }
 }
 </script>
@@ -83,9 +113,6 @@ export default {
 .m-searchbook {
   &__wrapper {
     width: 80%;
-    // @include desktop {
-    //   width: 60%;
-    // }
     text-align: center;
     border: 1px solid $site_borderColor;
     border-radius: 20px;
