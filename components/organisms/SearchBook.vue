@@ -8,7 +8,7 @@
         a-form-item(label="タイトル" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
           a-input(v-decorator="['search', { rules: [{ required: true, whitespace: true , message: '何か入力してください' }] }]" placeholder="タイトルを入力してください")
         a-form-item(label="件数" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
-          SelectBox(:values="selectNumbers" :defaultValue="maxResults" @selectbox-changed="selectBoxChanged")
+          SelectBox(@selectbox-changed="selectBoxChanged")
         a-form-item
           a-button(type="primary" html-type="submit" :disabled="isSearching").m-searchbook__btn
             a-icon(type="search").m-searchbook__searchIcon
@@ -39,7 +39,7 @@ export default {
       form: this.$form.createForm(this, { name: 'coordinated' }),
       isSearching: false,
       isSearched: false,
-      selectNumbers: [10, 30, 50, 100],
+      // selectNumbers: [10, 30, 50, 100],
       maxResults: 0
     }
   },
