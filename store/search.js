@@ -27,6 +27,9 @@ export const mutations = {
   enableSearched(state) {
     state.isSearched = true
   },
+  disableSearched(state) {
+    state.isSearched = false
+  },
   enableSearching(state) {
     state.isSearching = true
     state.infoText = '検索中'

@@ -70,6 +70,7 @@ export default {
     handleSubmit(e) {
       e.preventDefault()
       this.$store.commit('search/enableSearching')
+      this.$store.commit('search/disableSearched')
       this.booksDestroy()
 
       this.form.validateFields((err, values) => {
@@ -90,6 +91,7 @@ export default {
           axios
             .get(this.url, { params: p })
             .then((res) => {
+              this.setCurrent(1)
               this.setItems(res.data.items)
               this.setTotalItems(res.data.totalItems)
               this.$store.commit('search/setKeyword', values.search)
