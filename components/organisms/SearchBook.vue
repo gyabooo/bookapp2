@@ -68,13 +68,13 @@ export default {
       pagenationDestroy: 'destroy'
     }),
     handleSubmit(e) {
-      e.preventDefault()
-      this.$store.commit('search/enableSearching')
-      this.$store.commit('search/disableSearched')
-      this.booksDestroy()
-
       this.form.validateFields((err, values) => {
+        e.preventDefault()
         if (!err) {
+          this.$store.commit('search/enableSearching')
+          this.$store.commit('search/disableSearched')
+          this.booksDestroy()
+
           if (this.tempMaxResults === 0) {
             this.tempMaxResults = this.maxResults
           } else {
