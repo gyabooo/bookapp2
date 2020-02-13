@@ -7,22 +7,28 @@
       a-form(:form="form" @submit="handleSubmit").m-searchbook__form
         a-form-item(label="タイトル" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
           a-input(v-decorator="['search', { rules: [{ required: true, whitespace: true , message: '何か入力してください' }] }]" placeholder="タイトルを入力してください")
+        a-form-item(label="件数" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
+          SelectBox(:defaultValue="maxResults" @selectbox-changed="selectBoxChanged")
         a-form-item
           a-button(type="primary" html-type="submit" :disabled="isSearching").m-searchbook__btn
             a-icon(type="search").m-searchbook__searchIcon
       div.m-searchbook__info
         font-awesome-icon(:icon="['fas', 'info-circle']").m-searchbook__infoIcon
-        span.m-searchbook__infoText {{infoText}}
+        span.m-searchbook__infoText {{ infoText }}
       Loading(v-show="isSearching")
 </template>
 
 <script>
 import Loading from '@/components/atoms/Loading'
+import SelectBox from '@/components/atoms/SelectBox'
+import { mapGetters, mapActions } from 'vuex'
+
 const axios = require('axios')
 
 export default {
   components: {
-    Loading
+    Loading,
+    SelectBox
   },
   props: {
     url: {
@@ -33,50 +39,75 @@ export default {
   data() {
     return {
       form: this.$form.createForm(this, { name: 'coordinated' }),
-      isSearching: false,
-      isSearched: false,
-      contents: []
+      tempMaxResults: 0
     }
   },
+  computed: {
+    ...mapGetters('search', [
+      'isSearched',
+      'keyword',
+      'infoText',
+      'isSearching'
+    ]),
+    ...mapGetters('pagenation', ['current', 'maxResults'])
+  },
+  mounted() {
+    this.form.setFieldsValue({
+      search: this.keyword
+    })
+  },
   methods: {
+    ...mapActions('books', {
+      setItems: 'setItems',
+      setTotalItems: 'setTotalItems',
+      booksDestroy: 'destroy'
+    }),
+    ...mapActions('pagenation', {
+      setCurrent: 'setCurrent',
+      setMaxResults: 'setMaxResults',
+      pagenationDestroy: 'destroy'
+    }),
     handleSubmit(e) {
       e.preventDefault()
-      this.isSearching = true
-      this.$store.commit('books/reset', e.target.value)
+      this.$store.commit('search/enableSearching')
+      this.$store.commit('search/disableSearched')
+      this.booksDestroy()
 
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values.search)
+          if (this.tempMaxResults === 0) {
+            this.tempMaxResults = this.maxResults
+          } else {
+            this.setMaxResults(this.tempMaxResults)
+          }
+
+          const p = {
+            q: values.search,
+            Country: 'JP',
+            maxResults: this.maxResults,
+            startIndex: 0
+          }
+
           axios
-            .get(this.url + values.search)
+            .get(this.url, { params: p })
             .then((res) => {
-              console.log('res: ' + res.data.content)
-              this.$store.commit('books/set', res.data.content)
-              console.log('list: ' + this.$store.state.books.list)
+              this.setCurrent(1)
+              this.setItems(res.data.items)
+              this.setTotalItems(res.data.totalItems)
+              this.$store.commit('search/setKeyword', values.search)
             })
             .catch((e) => {
               this.error = e.message
             })
             .finally(() => {
-              // if (this.$store.state.books.list.length === 0) {
-              //   this.error = '検索結果が0件です'
-              // }
-              this.isSearching = false
-              this.isSearched = true
+              this.$store.commit('search/disableSearching')
+              this.$store.commit('search/enableSearched')
             })
         }
       })
-    }
-  },
-  computed: {
-    infoText() {
-      if (this.isSearching) {
-        return '検索中'
-      }
-      if (!this.isSearched) {
-        return '検索してください'
-      }
-      return `${this.$store.state.books.list.length}件見つかりました`
+    },
+    selectBoxChanged(e) {
+      this.tempMaxResults = e
     }
   }
 }
@@ -86,9 +117,6 @@ export default {
 .m-searchbook {
   &__wrapper {
     width: 80%;
-    @include desktop {
-      width: 60%;
-    }
     text-align: center;
     border: 1px solid $site_borderColor;
     border-radius: 20px;

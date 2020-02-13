@@ -23,7 +23,7 @@ $site_bgColor: white;
 }
 
 .page-enter-active, .page-leave-active {
-  transition: opacity .5s;
+  transition: opacity 0.5s;
 }
 .page-enter, .page-leave-to {
   opacity: 0;
@@ -50,6 +50,7 @@ $site_bgColor: white;
 .c-container {
   @include desktop {
     margin: 0 auto;
+    width: 60%;
   }
 }
 

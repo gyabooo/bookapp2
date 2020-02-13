@@ -49,7 +49,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['nuxt-fontawesome', '@nuxtjs/style-resources'],
+  modules: ['nuxt-fontawesome', '@nuxtjs/style-resources', '@nuxtjs/axios'],
   /*
    ** Build configuration
    */
@@ -59,7 +59,9 @@ export default {
      */
     extend(config, ctx) {}
   },
-  // Add custome settings
+  /*
+  Add custome settings
+  */
   fontawesome: {
     imports: [
       {
@@ -70,5 +72,16 @@ export default {
   },
   styleResources: {
     scss: ['~/assets/common.scss']
+  },
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/.netlify/functions/search': {
+      target: 'http://localhost:9000'
+    },
+    '/.netlify/functions/thumbnail': {
+      target: 'http://localhost:9000'
+    }
   }
 }
