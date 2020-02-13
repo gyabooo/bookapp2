@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    a-select(:defaultValue="values[0]" @change="handleChange").a-select__contents
+    a-select(:defaultValue="maxResults" @change="handleChange").a-select__contents
       a-select-option(v-for="value in values" :key="value.id" :value="value") {{ value }}
 </template>
 
@@ -12,16 +12,16 @@ export default {
       default() {
         return [10, 20, 30, 40]
       }
+    },
+    maxResults: {
+      type: Number,
+      default: 10
     }
   },
   methods: {
     handleChange(value) {
-      console.log(`selected ${value}`)
       this.$emit('selectbox-changed', value)
     }
-  },
-  mounted() {
-    this.$emit('selectbox-changed', this.values[0])
   }
 }
 </script>

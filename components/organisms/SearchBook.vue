@@ -8,7 +8,7 @@
         a-form-item(label="タイトル" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
           a-input(v-decorator="['search', { rules: [{ required: true, whitespace: true , message: '何か入力してください' }] }]" placeholder="タイトルを入力してください")
         a-form-item(label="件数" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
-          SelectBox(@selectbox-changed="selectBoxChanged")
+          SelectBox(:maxResults="maxResults" @selectbox-changed="selectBoxChanged")
         a-form-item
           a-button(type="primary" html-type="submit" :disabled="isSearching").m-searchbook__btn
             a-icon(type="search").m-searchbook__searchIcon
@@ -21,6 +21,8 @@
 <script>
 import Loading from '@/components/atoms/Loading'
 import SelectBox from '@/components/atoms/SelectBox'
+import { mapGetters, mapActions } from 'vuex'
+
 const axios = require('axios')
 
 export default {
@@ -37,74 +39,74 @@ export default {
   data() {
     return {
       form: this.$form.createForm(this, { name: 'coordinated' }),
-      isSearching: false,
-      isSearched: false,
-      // selectNumbers: [10, 30, 50, 100],
-      maxResults: 0
+      tempMaxResults: 0
     }
   },
   methods: {
+    ...mapActions('books', {
+      setItems: 'setItems',
+      setTotalItems: 'setTotalItems',
+      booksDestroy: 'destroy'
+    }),
+    ...mapActions('pagenation', {
+      setCurrent: 'setCurrent',
+      setMaxResults: 'setMaxResults',
+      pagenationDestroy: 'destroy'
+    }),
     handleSubmit(e) {
       e.preventDefault()
-      this.isSearching = true
-      this.$store.commit('books/reset', e.target.value)
+      this.$store.commit('search/enableSearching')
+      this.booksDestroy()
 
       this.form.validateFields((err, values) => {
         if (!err) {
+          if (this.tempMaxResults === 0) {
+            this.tempMaxResults = this.maxResults
+          } else {
+            this.setMaxResults(this.tempMaxResults)
+          }
+
           const p = {
             q: values.search,
             Country: 'JP',
-            maxResults: this.maxResults
+            maxResults: this.maxResults,
+            startIndex: 0
           }
 
           axios
             .get(this.url, { params: p })
             .then((res) => {
-              this.$store.commit('books/setItems', res.data.items)
-              this.$store.commit('books/setTotalItems', res.data.totalItems)
-              this.$store.commit('books/setKeyword', values.search)
+              this.setItems(res.data.items)
+              this.setTotalItems(res.data.totalItems)
+              this.$store.commit('search/setKeyword', values.search)
             })
             .catch((e) => {
               this.error = e.message
             })
             .finally(() => {
-              this.isSearching = false
-              this.isSearched = true
+              this.$store.commit('search/disableSearching')
+              this.$store.commit('search/enableSearched')
             })
         }
       })
     },
     selectBoxChanged(e) {
-      console.log('emit: ' + e)
-      this.maxResults = e
-      console.log('insert maxResults: ' + this.maxResults)
+      this.tempMaxResults = e
     }
   },
   computed: {
-    keyword() {
-      return this.$store.state.books.keyword
-    },
-    infoText() {
-      if (this.isSearching) {
-        return '検索中'
-      }
-      if (!this.isSearched) {
-        return '検索してください'
-      }
-      return `${this.$store.state.books.totalItems}件中${this.maxResults}件表示しています`
-    }
-  },
-  created() {
-    // console.log('SearchBook created')
+    ...mapGetters('search', [
+      'isSearched',
+      'keyword',
+      'infoText',
+      'isSearching'
+    ]),
+    ...mapGetters('pagenation', ['current', 'maxResults'])
   },
   mounted() {
-    // console.log('SearchBook mounted')
     this.form.setFieldsValue({
       search: this.keyword
     })
-  },
-  destroyed() {
-    // console.log('SearchBook destroyed')
   }
 }
 </script>

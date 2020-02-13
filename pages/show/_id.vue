@@ -84,20 +84,25 @@ export default {
     printType() {
       return this.volumeInfo.printType ? this.volumeInfo.printType : '不明'
     },
+    industryIdentifiers() {
+      return this.volumeInfo.industryIdentifiers
+        ? this.volumeInfo.industryIdentifiers
+        : []
+    },
     isbn13() {
-      const isbns = this.volumeInfo.industryIdentifiers.find(
+      const isbns = this.industryIdentifiers.find(
         (item) => item.type === 'ISBN_13'
       )
       return isbns ? isbns.identifier : 'なし'
     },
     isbn10() {
-      const isbns = this.volumeInfo.industryIdentifiers.find(
+      const isbns = this.industryIdentifiers.find(
         (item) => item.type === 'ISBN_10'
       )
       return isbns ? isbns.identifier : 'なし'
     },
     otherIdent() {
-      const isbns = this.volumeInfo.industryIdentifiers.find(
+      const isbns = this.industryIdentifiers.find(
         (item) => item.type === 'OTHER'
       )
       return isbns ? isbns.identifier : 'なし'
