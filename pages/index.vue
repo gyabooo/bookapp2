@@ -3,6 +3,7 @@
     SearchBook(:url="url")
     a-layout-header.c-heading.p-result
       h1.p-result__title 検索結果
+    Pagenation(v-show="isSearched" :totalItems="totalItems" :current="current" :maxResults="maxResults" @pagenation-changed="pagenationChanged")
     BookList(:books="items").p-result__books
     Pagenation(v-show="isSearched" :totalItems="totalItems" :current="current" :maxResults="maxResults" @pagenation-changed="pagenationChanged")
 </template>

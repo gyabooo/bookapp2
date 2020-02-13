@@ -12,8 +12,10 @@ export default {
   },
   props: {
     books: {
-      type: Object,
-      default: Object
+      type: Array,
+      default() {
+        return []
+      }
     }
   }
 }

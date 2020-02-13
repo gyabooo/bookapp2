@@ -19,9 +19,9 @@ export default {
       default: 10
     }
   },
-  data() {
-    return {
-      currentPage: this.current
+  computed: {
+    currentPage() {
+      return this.current
     }
   },
   methods: {
