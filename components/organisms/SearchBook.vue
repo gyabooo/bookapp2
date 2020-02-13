@@ -8,7 +8,7 @@
         a-form-item(label="タイトル" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
           a-input(v-decorator="['search', { rules: [{ required: true, whitespace: true , message: '何か入力してください' }] }]" placeholder="タイトルを入力してください")
         a-form-item(label="件数" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }")
-          SelectBox(:maxResults="maxResults" @selectbox-changed="selectBoxChanged")
+          SelectBox(:defaultValue="maxResults" @selectbox-changed="selectBoxChanged")
         a-form-item
           a-button(type="primary" html-type="submit" :disabled="isSearching").m-searchbook__btn
             a-icon(type="search").m-searchbook__searchIcon
@@ -41,6 +41,20 @@ export default {
       form: this.$form.createForm(this, { name: 'coordinated' }),
       tempMaxResults: 0
     }
+  },
+  computed: {
+    ...mapGetters('search', [
+      'isSearched',
+      'keyword',
+      'infoText',
+      'isSearching'
+    ]),
+    ...mapGetters('pagenation', ['current', 'maxResults'])
+  },
+  mounted() {
+    this.form.setFieldsValue({
+      search: this.keyword
+    })
   },
   methods: {
     ...mapActions('books', {
@@ -93,20 +107,6 @@ export default {
     selectBoxChanged(e) {
       this.tempMaxResults = e
     }
-  },
-  computed: {
-    ...mapGetters('search', [
-      'isSearched',
-      'keyword',
-      'infoText',
-      'isSearching'
-    ]),
-    ...mapGetters('pagenation', ['current', 'maxResults'])
-  },
-  mounted() {
-    this.form.setFieldsValue({
-      search: this.keyword
-    })
   }
 }
 </script>

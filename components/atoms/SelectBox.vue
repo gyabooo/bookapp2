@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    a-select(:defaultValue="maxResults" @change="handleChange").a-select__contents
+    a-select(:defaultValue="defaultValue" @change="handleChange").a-select__contents
       a-select-option(v-for="value in values" :key="value.id" :value="value") {{ value }}
 </template>
 
@@ -13,9 +13,9 @@ export default {
         return [10, 20, 30, 40]
       }
     },
-    maxResults: {
+    defaultValue: {
       type: Number,
-      default: 10
+      default: 0
     }
   },
   methods: {

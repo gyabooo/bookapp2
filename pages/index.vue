@@ -26,6 +26,11 @@ export default {
       url: 'https://www.googleapis.com/books/v1/volumes'
     }
   },
+  computed: {
+    ...mapGetters('books', ['items', 'totalItems']),
+    ...mapGetters('pagenation', ['current', 'maxResults']),
+    ...mapGetters('search', ['keyword', 'isSearched'])
+  },
   methods: {
     ...mapActions('pagenation', {
       setCurrent: 'setCurrent'
@@ -59,11 +64,6 @@ export default {
         })
         .finally(() => {})
     }
-  },
-  computed: {
-    ...mapGetters('books', ['items', 'totalItems']),
-    ...mapGetters('pagenation', ['current', 'maxResults']),
-    ...mapGetters('search', ['keyword', 'isSearched'])
   }
 }
 </script>

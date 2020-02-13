@@ -13,7 +13,12 @@ export default {
   components: {
     BookImage
   },
-  props: ['book'],
+  props: {
+    book: {
+      type: Object,
+      default: Object
+    }
+  },
   computed: {
     title() {
       return this.book.volumeInfo.title

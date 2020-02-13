@@ -10,7 +10,12 @@ export default {
   components: {
     Book
   },
-  props: ['books']
+  props: {
+    books: {
+      type: Object,
+      default: Object
+    }
+  }
 }
 </script>
 

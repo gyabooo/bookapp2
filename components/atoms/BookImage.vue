@@ -6,7 +6,12 @@
 const noImagePath = '/images/no-image.png'
 
 export default {
-  props: ['book'],
+  props: {
+    book: {
+      type: Object,
+      default: Object
+    }
+  },
   computed: {
     image() {
       return this.book.volumeInfo.imageLinks
