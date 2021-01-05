@@ -17,7 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@nuxtjs/axios": "^5.9.5",
     "ant-design-vue": "^1.1.10",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
     "xml-js": "^1.6.11"
